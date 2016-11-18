@@ -28,7 +28,11 @@ import org.openbase.jul.exception.NotAvailableException;
 import rsb.converter.DefaultConverterRepository;
 import rsb.converter.ProtocolBufferConverter;
 import rst.domotic.state.ContactStateType.ContactState;
+import rst.domotic.state.DoorStateType.DoorState;
 import rst.domotic.state.HandleStateType.HandleState;
+import rst.domotic.state.PassageStateType.PassageState;
+import rst.domotic.state.WindowStateType.WindowState;
+import rst.domotic.unit.UnitConfigType.UnitConfig;
 import rst.domotic.unit.connection.ConnectionDataType.ConnectionData;
 
 /**
@@ -57,14 +61,29 @@ public class ConnectionRemote extends AbstractUnitRemote<ConnectionData> impleme
     }
 
     @Override
-    public HandleState getHandleState() throws NotAvailableException {
-        // TODO: connection has DOOR/WINDOW or PASSAGE state
-        throw new UnsupportedOperationException();
+    public DoorState getDoorState() throws NotAvailableException {
+        try {
+            return getData().getDoorState();
+        } catch (CouldNotPerformException ex) {
+            throw new NotAvailableException("DoorState", ex);
+        }
     }
 
     @Override
-    public ContactState getContactState() throws NotAvailableException {
-        // TODO: connection has DOOR/WINDOW or PASSAGE state
-        throw new UnsupportedOperationException();
+    public PassageState getPassageState() throws NotAvailableException {
+        try {
+            return getData().getPassageState();
+        } catch (CouldNotPerformException ex) {
+            throw new NotAvailableException("PassageState", ex);
+        }
+    }
+
+    @Override
+    public WindowState getWindowState() throws NotAvailableException {
+        try {
+            return getData().getWindowState();
+        } catch (CouldNotPerformException ex) {
+            throw new NotAvailableException("WindowState", ex);
+        }
     }
 }

@@ -42,6 +42,7 @@ import org.openbase.bco.dal.lib.layer.service.provider.SmokeAlarmStateProviderSe
 import org.openbase.bco.dal.lib.layer.service.provider.SmokeStateProviderService;
 import org.openbase.bco.dal.lib.layer.service.provider.TamperStateProviderService;
 import org.openbase.bco.dal.lib.layer.service.provider.TemperatureStateProviderService;
+import org.openbase.bco.dal.remote.detector.PresenceDetector;
 import org.openbase.bco.dal.remote.unit.UnitRemote;
 import org.openbase.bco.dal.remote.unit.UnitRemoteFactory;
 import org.openbase.bco.dal.remote.unit.UnitRemoteFactoryImpl;
@@ -77,6 +78,7 @@ import rst.domotic.state.MotionStateType.MotionState;
 import rst.domotic.state.PowerConsumptionStateType;
 import rst.domotic.state.PowerConsumptionStateType.PowerConsumptionState;
 import rst.domotic.state.PowerStateType.PowerState;
+import rst.domotic.state.PresenceStateType.PresenceState;
 import rst.domotic.state.SmokeStateType.SmokeState;
 import rst.domotic.state.StandbyStateType.StandbyState;
 import rst.domotic.state.TamperStateType.TamperState;
@@ -110,12 +112,14 @@ public class LocationControllerImpl extends AbstractConfigurableController<Locat
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(BrightnessState.getDefaultInstance()));
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(TemperatureState.getDefaultInstance()));
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(ActionConfig.getDefaultInstance()));
+        DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(PresenceState.getDefaultInstance()));
     }
 
     private final UnitRemoteFactory factory;
     private final Map<String, UnitRemote> unitRemoteMap;
     private final Map<ServiceType, Collection<? extends Service>> serviceMap;
     private final List<String> originalUnitIdList;
+    private final PresenceDetector presenceDetector;
     private UnitRegistry unitRegistry;
 
     public LocationControllerImpl() throws InstantiationException {
@@ -124,6 +128,18 @@ public class LocationControllerImpl extends AbstractConfigurableController<Locat
         this.serviceMap = new HashMap<>();
         this.originalUnitIdList = new ArrayList<>();
         this.factory = UnitRemoteFactoryImpl.getInstance();
+        this.presenceDetector = new PresenceDetector();
+
+        this.presenceDetector.addDataObserver(new Observer<PresenceState>() {
+            @Override
+            public void update(Observable<PresenceState> source, PresenceState data) throws Exception {
+                try (ClosableDataBuilder<LocationData.Builder> dataBuilder = getDataBuilder(this)) {
+                    dataBuilder.getInternalBuilder().setPresenceState(data);
+                } catch (CouldNotPerformException ex) {
+                    throw new CouldNotPerformException("Could not apply data change!", ex);
+                }
+            }
+        });
     }
 
     private boolean isSupportedServiceType(final ServiceType serviceType) {
@@ -370,6 +386,7 @@ public class LocationControllerImpl extends AbstractConfigurableController<Locat
                     unitRemoteMap.put(unitConfig.getId(), unitRemote);
                 }
             }
+            presenceDetector.init(this);
         } catch (CouldNotPerformException ex) {
             throw new InitializationException(this, ex);
         }
@@ -433,6 +450,7 @@ public class LocationControllerImpl extends AbstractConfigurableController<Locat
                 addRemoteToServiceMap(serviceTemplate.getType(), unitRemote);
             }
         }
+        presenceDetector.activate();
         getCurrentStatus();
     }
 
@@ -473,6 +491,7 @@ public class LocationControllerImpl extends AbstractConfigurableController<Locat
 
     @Override
     public void deactivate() throws InterruptedException, CouldNotPerformException {
+        presenceDetector.deactivate();
         super.deactivate();
         for (UnitRemote unitRemote : unitRemoteMap.values()) {
             unitRemote.deactivate();

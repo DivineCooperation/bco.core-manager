@@ -182,6 +182,7 @@
         <module>agent-manager</module>
         <module>app-manager</module>
         <module>user-manager</module>
+        <module>util</module>
     </modules>
     
     <properties>

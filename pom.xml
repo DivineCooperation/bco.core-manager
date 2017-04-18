@@ -21,7 +21,7 @@
         <developer>
             <id>DivineThreepwood</id>
             <name>Marian Pohling</name>
-            <email>divinethreepwood@gmail.com</email>
+            <email>divine@openbase.org</email>
             <url>https://github.com/DivineThreepwood</url>
             <organization>openbase.org</organization>
             <organizationUrl>https://github.com/openbase</organizationUrl>
@@ -60,7 +60,7 @@
     <packaging>pom</packaging>
 
     <scm>
-        <connection>scm:git:https://github.com/openbase/bco.manager.gitt</connection>
+        <connection>scm:git:https://github.com/openbase/bco.manager.git</connection>
         <developerConnection>scm:git:https://github.com/openbase/bco.manager.git</developerConnection>
         <url>https://github.com/openbase/bco.manager.git</url>
       <tag>HEAD</tag>

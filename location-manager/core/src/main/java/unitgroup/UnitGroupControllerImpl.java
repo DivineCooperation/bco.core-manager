@@ -21,12 +21,9 @@ package unitgroup;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-import java.util.Set;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+
 import org.openbase.bco.dal.lib.layer.service.ServiceRemote;
 import org.openbase.bco.dal.lib.layer.unit.AbstractBaseUnitController;
-import org.openbase.bco.dal.remote.service.AbstractServiceRemote;
 import org.openbase.bco.dal.remote.service.ServiceRemoteManager;
 import org.openbase.bco.manager.location.lib.unitgroup.UnitGroupController;
 import org.openbase.jul.exception.CouldNotPerformException;
@@ -35,7 +32,6 @@ import org.openbase.jul.exception.printer.ExceptionPrinter;
 import org.openbase.jul.exception.printer.LogLevel;
 import org.openbase.jul.extension.protobuf.ClosableDataBuilder;
 import org.openbase.jul.pattern.Observable;
-import org.openbase.jul.pattern.Remote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rsb.converter.DefaultConverterRepository;
@@ -61,18 +57,23 @@ import rst.domotic.state.TemperatureStateType.TemperatureState;
 import rst.domotic.unit.UnitConfigType.UnitConfig;
 import rst.domotic.unit.UnitTemplateType;
 import rst.domotic.unit.location.LocationDataType.LocationData;
+import rst.domotic.unit.unitgroup.UnitGroupDataType;
 import rst.domotic.unit.unitgroup.UnitGroupDataType.UnitGroupData;
 import rst.vision.ColorType.Color;
 import rst.vision.HSBColorType.HSBColor;
 import rst.vision.RGBColorType.RGBColor;
 
+import java.util.Set;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 /**
- *
  * @author <a href="mailto:pLeminoq@openbase.org">Tamino Huxohl</a>
  */
 public class UnitGroupControllerImpl extends AbstractBaseUnitController<UnitGroupData, UnitGroupData.Builder> implements UnitGroupController {
 
     static {
+        DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(UnitGroupDataType.UnitGroupData.getDefaultInstance()));
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(LocationData.getDefaultInstance()));
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(HSBColor.getDefaultInstance()));
         DefaultConverterRepository.getDefaultConverterRepository().addConverter(new ProtocolBufferConverter<>(ColorState.getDefaultInstance()));
@@ -120,11 +121,11 @@ public class UnitGroupControllerImpl extends AbstractBaseUnitController<UnitGrou
 
     @Override
     public void activate() throws InterruptedException, CouldNotPerformException {
+        logger.debug("Activate UnitGroupController[" + getConfig().getLabel() + "]");
+        super.activate();
+
         serviceRemoteManager.activate();
         updateUnitData();
-        // super activation is disabled because unit remote is not a RSBRemoteService
-        // TODO: Refactor to support UnitRemotes which are not extended RSBRemoteService instances.
-        // super.activate();
     }
 
     @Override
@@ -134,7 +135,10 @@ public class UnitGroupControllerImpl extends AbstractBaseUnitController<UnitGrou
 
     @Override
     public void deactivate() throws CouldNotPerformException, InterruptedException {
+        logger.debug("Deactivate UnitGroupController[" + getConfig().getLabel() + "]");
         serviceRemoteManager.deactivate();
+
+        super.deactivate();
     }
 
     @Override

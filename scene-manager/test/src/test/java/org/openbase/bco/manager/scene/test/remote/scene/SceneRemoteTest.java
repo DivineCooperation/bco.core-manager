@@ -221,7 +221,10 @@ public class SceneRemoteTest {
             unitRegistry.registerUnitConfig(unitConfig).get();
 
             label = SCENE_ROOT_LOCATION_ALL_DEVICES_ON;
-            LocationRemote locationRemote = Units.getUnit(Registries.getLocationRegistry().getRootLocationConfig(), true, LocationRemote.class);
+            LocationRemote locationRemote = Units.getUnit(Registries.getLocationRegistry().getRootLocationConfig(), false, LocationRemote.class);
+            locationRemote.addConnectionStateObserver((source, data) -> System.out.println("ConnectionState update of root location remote[" + data + "] isActive[" + locationRemote.isActive() + "]"));
+            System.out.println("LocationRemote connectionState[" + locationRemote.getConnectionState().name() + "] isActive[" + locationRemote.isActive() + "]");
+            locationRemote.waitForData();
             locationRemote.setPowerState(POWER_ON).get();
             locationRemote.requestData().get();
             sceneConfig = SceneConfig.newBuilder().addAllRequiredServiceStateDescription(locationRemote.recordSnapshot().get().getServiceStateDescriptionList()).build();
@@ -292,9 +295,7 @@ public class SceneRemoteTest {
                 }
             }
 
-            UnitConfig bla = Registries.getUnitRegistry().registerUnitConfig(unitConfig.build()).get();
-            System.out.println("Registered group [" + bla + "]");
-            return bla.getId();
+            return Registries.getUnitRegistry().registerUnitConfig(unitConfig.build()).get().getId();
         } catch (CouldNotPerformException | InterruptedException | ExecutionException ex) {
             throw new CouldNotPerformException("Could not register unit groups!", ex);
         }

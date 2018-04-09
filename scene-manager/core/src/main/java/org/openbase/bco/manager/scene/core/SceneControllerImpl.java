@@ -28,10 +28,10 @@ import org.openbase.bco.dal.remote.unit.ButtonRemote;
 import org.openbase.bco.dal.remote.unit.Units;
 import org.openbase.bco.manager.scene.lib.SceneController;
 import org.openbase.bco.registry.remote.Registries;
-import org.openbase.jps.core.JPService;
 import org.openbase.jul.exception.*;
 import org.openbase.jul.exception.printer.ExceptionPrinter;
 import org.openbase.jul.exception.printer.LogLevel;
+import org.openbase.jul.extension.rst.processing.TimestampProcessor;
 import org.openbase.jul.pattern.Observable;
 import org.openbase.jul.pattern.Observer;
 import org.openbase.jul.schedule.SyncObject;
@@ -41,8 +41,10 @@ import rst.domotic.action.ActionDescriptionType;
 import rst.domotic.action.ActionDescriptionType.ActionDescription;
 import rst.domotic.action.ActionFutureType.ActionFuture;
 import rst.domotic.service.ServiceStateDescriptionType.ServiceStateDescription;
+import rst.domotic.service.ServiceTemplateType.ServiceTemplate.ServiceType;
 import rst.domotic.state.ActivationStateType.ActivationState;
 import rst.domotic.state.ButtonStateType.ButtonState;
+import rst.domotic.state.ButtonStateType.ButtonState.State;
 import rst.domotic.unit.UnitConfigType.UnitConfig;
 import rst.domotic.unit.UnitTemplateType.UnitTemplate.UnitType;
 import rst.domotic.unit.dal.ButtonDataType.ButtonData;
@@ -79,6 +81,12 @@ public class SceneControllerImpl extends AbstractExecutableBaseUnitController<Sc
         this.buttonRemoteSet = new HashSet<>();
         this.remoteActionList = new ArrayList<>();
         this.buttonObserver = (final Observable<ButtonData> source, ButtonData data) -> {
+
+            // skip initial button state synchronization during system startup
+            if (data.getButtonStateLast().getValue().equals(State.UNKNOWN)) {
+                return;
+            }
+
             if (data.getButtonState().getValue().equals(ButtonState.State.PRESSED)) {
                 setActivationState(ActivationState.newBuilder().setValue(ActivationState.State.ACTIVE).build());
             }
@@ -234,7 +242,7 @@ public class SceneControllerImpl extends AbstractExecutableBaseUnitController<Sc
                     futureActionEntry.getKey().cancel(true);
                 }
             }
-            updateActivationState(ActivationState.newBuilder().setValue(ActivationState.State.DEACTIVE).build());
+            applyDataUpdate(ActivationState.newBuilder().setValue(ActivationState.State.DEACTIVE).setTimestamp(TimestampProcessor.getCurrentTimestamp()).build(), ServiceType.ACTIVATION_STATE_SERVICE);
         }
     }
 

@@ -25,8 +25,12 @@ package org.openbase.bco.device.openhab.manager;
 import org.eclipse.smarthome.io.rest.core.item.EnrichedItemDTO;
 import org.openbase.bco.dal.control.layer.unit.device.DeviceManagerImpl;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
+import org.openbase.bco.device.openhab.jp.JPExcludeDeviceList;
+import org.openbase.bco.device.openhab.jp.JPIncludeDeviceList;
 import org.openbase.bco.device.openhab.manager.service.OpenHABOperationServiceFactory;
 import org.openbase.bco.registry.remote.Registries;
+import org.openbase.jps.core.JPService;
+import org.openbase.jps.exception.JPNotAvailableException;
 import org.openbase.jul.exception.CouldNotPerformException;
 import org.openbase.jul.exception.ExceptionProcessor;
 import org.openbase.jul.exception.InstantiationException;
@@ -40,6 +44,8 @@ import org.openbase.type.domotic.unit.UnitConfigType.UnitConfig;
 import org.openbase.type.domotic.unit.device.DeviceClassType.DeviceClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class OpenHABDeviceManager extends DeviceManagerImpl implements Launchable<Void>, VoidInitializable {
 
@@ -94,6 +100,31 @@ public class OpenHABDeviceManager extends DeviceManagerImpl implements Launchabl
 
     @Override
     public boolean isSupported(UnitConfig config) {
+        try {
+            final List<String> includedAliases = JPService.getProperty(JPIncludeDeviceList.class).getValue();
+
+            if (includedAliases.size() > 0) {
+                for (String alias : config.getAliasList()) {
+                    for (String includedAlias : includedAliases) {
+                        if (alias.equals(includedAlias)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            for (String alias : config.getAliasList()) {
+                for (String excludedAlias : JPService.getProperty(JPExcludeDeviceList.class).getValue()) {
+                    if (alias.equals(excludedAlias)) {
+                        return false;
+                    }
+                }
+            }
+        } catch (JPNotAvailableException ex) {
+            ExceptionPrinter.printHistory(ex, LOGGER, LogLevel.WARN);
+        }
+
         DeviceClass deviceClass;
         try {
             try {

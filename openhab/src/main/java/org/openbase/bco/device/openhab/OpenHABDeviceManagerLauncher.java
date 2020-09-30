@@ -23,6 +23,8 @@ package org.openbase.bco.device.openhab;
  */
 
 import org.openbase.bco.authentication.lib.jp.JPCredentialsDirectory;
+import org.openbase.bco.device.openhab.jp.JPExcludeDeviceList;
+import org.openbase.bco.device.openhab.jp.JPIncludeDeviceList;
 import org.openbase.bco.device.openhab.jp.JPOpenHABURI;
 import org.openbase.bco.device.openhab.manager.OpenHABDeviceManager;
 import org.openbase.bco.authentication.lib.BCO;
@@ -49,6 +51,8 @@ public class OpenHABDeviceManagerLauncher extends AbstractLauncher<OpenHABDevice
         JPService.registerProperty(JPRSBLegacyMode.class);
         JPService.registerProperty(JPRSBTransport.class);
         JPService.registerProperty(JPRSBThreadPooling.class);
+        JPService.registerProperty(JPExcludeDeviceList.class);
+        JPService.registerProperty(JPIncludeDeviceList.class);
     }
 
     /**

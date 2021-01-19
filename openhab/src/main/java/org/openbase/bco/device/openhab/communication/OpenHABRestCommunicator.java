@@ -61,6 +61,7 @@ public class OpenHABRestCommunicator extends OpenHABRestConnection {
     public static final String BINDINGS_TARGET = "bindings";
     public static final String CONFIG_TARGET = "config";
     public static final String SCAN_TARGET = "scan";
+    public static final String STATE_TARGET = "state";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenHABRestCommunicator.class);
 

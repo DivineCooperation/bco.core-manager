@@ -23,12 +23,12 @@ package org.openbase.bco.device.openhab.manager.transform;
  */
 
 import com.google.protobuf.Message;
-import org.eclipse.smarthome.core.types.Command;
 import org.openbase.bco.registry.remote.Registries;
 import org.openbase.jul.exception.CouldNotPerformException;
 import org.openbase.jul.exception.NotAvailableException;
 import org.openbase.jul.processing.StringProcessor;
 import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate.ServiceType;
+import org.openhab.core.types.Command;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;

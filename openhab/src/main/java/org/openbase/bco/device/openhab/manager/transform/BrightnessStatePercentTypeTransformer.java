@@ -22,9 +22,9 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.PercentType;
 import org.openbase.type.domotic.state.BrightnessStateType.BrightnessState;
 import org.openbase.type.domotic.state.BrightnessStateType.BrightnessState.Builder;
+import org.openhab.core.library.types.PercentType;
 
 import java.math.BigDecimal;
 
@@ -37,7 +37,6 @@ public class BrightnessStatePercentTypeTransformer implements ServiceStateComman
      * Transform a number to a brightness state by setting the number as the brightness value.
      *
      * @param percentType the brightness value
-     *
      * @return the corresponding brightness state
      */
     @Override
@@ -51,7 +50,6 @@ public class BrightnessStatePercentTypeTransformer implements ServiceStateComman
      * Get the brightness value.
      *
      * @param brightnessState the state
-     *
      * @return the current brightness value
      */
     @Override

@@ -22,14 +22,14 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
-import org.eclipse.smarthome.core.library.types.HSBType;
-import org.eclipse.smarthome.core.library.types.PercentType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.extension.type.transform.HSBColorToRGBColorTransformer;
 import org.openbase.type.domotic.state.ColorStateType.ColorState;
 import org.openbase.type.vision.ColorType.Color.Type;
 import org.openbase.type.vision.HSBColorType.HSBColor;
+import org.openhab.core.library.types.DecimalType;
+import org.openhab.core.library.types.HSBType;
+import org.openhab.core.library.types.PercentType;
 
 import java.math.BigDecimal;
 

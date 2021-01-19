@@ -22,11 +22,11 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.TypeNotSupportedException;
 import org.openbase.type.domotic.state.TamperStateType.TamperState;
 import org.openbase.type.domotic.state.TamperStateType.TamperState.State;
+import org.openhab.core.library.types.OnOffType;
 
 /**
  * * @author <a href="mailto:pleminoq@openbase.org">Tamino Huxohl</a>

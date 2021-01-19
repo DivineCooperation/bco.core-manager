@@ -22,11 +22,11 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.StopMoveType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.TypeNotSupportedException;
 import org.openbase.type.domotic.binding.openhab.StopMoveHolderType.StopMoveHolder;
 import org.openbase.type.domotic.state.BlindStateType.BlindState;
+import org.openhab.core.library.types.StopMoveType;
 
 /**
  * * @author <a href="mailto:pleminoq@openbase.org">Tamino Huxohl</a>

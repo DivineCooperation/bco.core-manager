@@ -22,10 +22,10 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.PercentType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.TypeNotSupportedException;
 import org.openbase.type.domotic.state.PowerStateType.PowerState;
+import org.openhab.core.library.types.PercentType;
 
 /**
  * @author <a href="mailto:divine@openbase.org">Divine Threepwood</a>

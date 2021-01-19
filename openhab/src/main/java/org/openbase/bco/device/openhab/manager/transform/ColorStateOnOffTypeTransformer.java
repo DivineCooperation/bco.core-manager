@@ -22,18 +22,11 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
-import org.eclipse.smarthome.core.library.types.HSBType;
-import org.eclipse.smarthome.core.library.types.OnOffType;
-import org.eclipse.smarthome.core.library.types.PercentType;
 import org.openbase.jul.exception.*;
 import org.openbase.jul.extension.type.transform.HSBColorToRGBColorTransformer;
 import org.openbase.type.domotic.state.ColorStateType.ColorState;
-import org.openbase.type.domotic.state.PowerStateType;
-import org.openbase.type.vision.ColorType.Color.Type;
 import org.openbase.type.vision.HSBColorType;
-
-import java.math.BigDecimal;
+import org.openhab.core.library.types.OnOffType;
 
 public class ColorStateOnOffTypeTransformer implements ServiceStateCommandTransformer<ColorState, OnOffType> {
 
@@ -93,7 +86,7 @@ public class ColorStateOnOffTypeTransformer implements ServiceStateCommandTransf
             } else if (hsbColor.getBrightness() == 0) {
                 return OnOffType.OFF;
             } else {
-                throw new InvalidStateException("Brightness has an invalid value: "+hsbColor.getBrightness());
+                throw new InvalidStateException("Brightness has an invalid value: " + hsbColor.getBrightness());
             }
         } catch (Exception ex) {
             throw new CouldNotTransformException("Could not transform " + ColorState.class.getName() + " to " + OnOffType.class.getName() + "!", ex);

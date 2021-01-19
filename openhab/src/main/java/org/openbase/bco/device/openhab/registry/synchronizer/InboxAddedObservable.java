@@ -26,7 +26,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.eclipse.smarthome.config.discovery.dto.DiscoveryResultDTO;
+import org.openhab.core.config.discovery.dto.DiscoveryResultDTO;
 
 /**
  * Observable notifying on inbox events of openHAB.

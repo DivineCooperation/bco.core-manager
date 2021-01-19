@@ -22,8 +22,6 @@ package org.openbase.bco.device.openhab.registry.synchronizer;
  * #L%
  */
 
-import org.eclipse.smarthome.core.thing.link.dto.ItemChannelLinkDTO;
-import org.eclipse.smarthome.io.rest.core.item.EnrichedItemDTO;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
 import org.openbase.bco.device.openhab.registry.diff.IdentifiableEnrichedItemDTO;
 import org.openbase.bco.device.openhab.registry.synchronizer.OpenHABItemProcessor.OpenHABItemNameMetaData;
@@ -36,6 +34,8 @@ import org.openbase.jul.storage.registry.AbstractSynchronizer;
 import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate.ServiceType;
 import org.openbase.type.domotic.state.ConnectionStateType.ConnectionState;
 import org.openbase.type.domotic.unit.UnitConfigType.UnitConfig;
+import org.openhab.core.io.rest.core.item.EnrichedItemDTO;
+import org.openhab.core.thing.link.dto.ItemChannelLinkDTO;
 
 import java.util.ArrayList;
 import java.util.List;

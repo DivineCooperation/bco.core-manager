@@ -23,28 +23,28 @@ package org.openbase.bco.device.openhab.manager.service;
  */
 
 import com.google.protobuf.Message;
-import org.eclipse.smarthome.core.types.Command;
+import org.openbase.bco.dal.lib.layer.service.Service;
+import org.openbase.bco.dal.lib.layer.service.ServiceProvider;
 import org.openbase.bco.dal.lib.layer.service.ServiceStateProcessor;
+import org.openbase.bco.dal.lib.layer.unit.Unit;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
 import org.openbase.bco.device.openhab.manager.transform.ServiceStateCommandTransformerPool;
 import org.openbase.bco.device.openhab.manager.transform.ServiceTypeCommandMapping;
 import org.openbase.bco.device.openhab.registry.synchronizer.OpenHABItemProcessor;
-import org.openbase.bco.dal.lib.layer.service.Service;
-import org.openbase.bco.dal.lib.layer.service.ServiceProvider;
-import org.openbase.bco.dal.lib.layer.unit.Unit;
-import org.openbase.jul.exception.*;
 import org.openbase.jul.exception.InstantiationException;
+import org.openbase.jul.exception.*;
 import org.openbase.jul.exception.printer.ExceptionPrinter;
 import org.openbase.jul.exception.printer.LogLevel;
 import org.openbase.jul.processing.StringProcessor;
 import org.openbase.jul.schedule.FutureProcessor;
 import org.openbase.jul.schedule.SyncObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.openbase.type.domotic.action.ActionDescriptionType.ActionDescription;
 import org.openbase.type.domotic.binding.openhab.OpenhabCommandType;
 import org.openbase.type.domotic.service.ServiceConfigType.ServiceConfig;
 import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate;
+import org.openhab.core.types.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Future;
 
@@ -116,7 +116,7 @@ public abstract class OpenHABService<ST extends Service & Unit<?>> implements Se
                 try {
                     MultiException.checkAndThrow(() -> "Some command classes could not be used to apply the state:", exceptionStack);
                 } catch (Exception ex) {
-                    ExceptionPrinter.printHistory(ex , logger, LogLevel.WARN);
+                    ExceptionPrinter.printHistory(ex, logger, LogLevel.WARN);
                 }
             }
 

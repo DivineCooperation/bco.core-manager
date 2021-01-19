@@ -23,9 +23,9 @@ package org.openbase.bco.device.openhab.manager.transform;
  */
 
 import com.google.protobuf.Message;
-import org.eclipse.smarthome.core.types.Command;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.TypeNotSupportedException;
+import org.openhab.core.types.Command;
 
 /**
  * @param <S> the service state that can be transformed.

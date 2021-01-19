@@ -23,8 +23,6 @@ package org.openbase.bco.device.openhab.registry.synchronizer;
  */
 
 
-import org.eclipse.smarthome.config.discovery.DiscoveryResultFlag;
-import org.eclipse.smarthome.config.discovery.dto.DiscoveryResultDTO;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
 import org.openbase.bco.registry.remote.Registries;
 import org.openbase.jul.exception.CouldNotPerformException;
@@ -35,6 +33,8 @@ import org.openbase.jul.exception.printer.LogLevel;
 import org.openbase.jul.iface.Activatable;
 import org.openbase.jul.pattern.Observer;
 import org.openbase.jul.pattern.provider.DataProvider;
+import org.openhab.core.config.discovery.DiscoveryResultFlag;
+import org.openhab.core.config.discovery.dto.DiscoveryResultDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

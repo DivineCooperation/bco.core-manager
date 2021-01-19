@@ -1,8 +1,8 @@
 package org.openbase.bco.device.openhab.manager.transform;
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.type.domotic.state.IlluminanceStateType.IlluminanceState;
+import org.openhab.core.library.types.DecimalType;
 
 /*-
  * #%L
@@ -35,7 +35,6 @@ public class IlluminanceStateDecimalTypeTransformer implements ServiceStateComma
      * Transform a number to an illuminationState by setting the number as the illuminance.
      *
      * @param decimalType the brightness value
-     *
      * @return the corresponding brightness state
      */
     @Override
@@ -49,12 +48,11 @@ public class IlluminanceStateDecimalTypeTransformer implements ServiceStateComma
      * Get the illuminance value.
      *
      * @param illuminanceState the state
-     *
      * @return the current illuminance
      */
     @Override
     public DecimalType transform(IlluminanceState illuminanceState) throws CouldNotTransformException {
-        if(!illuminanceState.isInitialized() || Double.isNaN(illuminanceState.getIlluminance())) {
+        if (!illuminanceState.isInitialized() || Double.isNaN(illuminanceState.getIlluminance())) {
             throw new CouldNotTransformException("Given illuminance state is not initialized!");
         }
         return new DecimalType(illuminanceState.getIlluminance());

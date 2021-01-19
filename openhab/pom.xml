@@ -88,17 +88,22 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>2.31</version>
+            <version>${dependency.jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
-            <version>2.31</version>
+            <version>${dependency.jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-sse</artifactId>
-            <version>2.31</version>
+            <version>${dependency.jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.security</groupId>
+            <artifactId>oauth2-client</artifactId>
+            <version>${dependency.jersey.version}</version>
         </dependency>
 
 <!--        <dependency>-->
@@ -154,7 +159,8 @@
     </dependencies>
 
     <properties>
-        <dependency.openhab.version>2.5.0</dependency.openhab.version>
+        <dependency.openhab.version>3.0.0</dependency.openhab.version>
+        <dependency.jersey.version>2.31</dependency.jersey.version>
     </properties>
 
     <repositories>

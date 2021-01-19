@@ -22,14 +22,14 @@ package org.openbase.bco.device.openhab.communication;
  * #L%
  */
 
-import org.eclipse.smarthome.core.types.Command;
 import org.openbase.bco.device.openhab.manager.transform.ServiceTypeCommandMapping;
 import org.openbase.bco.registry.remote.Registries;
 import org.openbase.jul.exception.NotAvailableException;
 import org.openbase.jul.exception.printer.ExceptionPrinter;
+import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate;
+import org.openhab.core.types.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate;
 
 public class TestClient {
 

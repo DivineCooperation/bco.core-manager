@@ -22,8 +22,6 @@ package org.openbase.bco.device.openhab.registry.synchronizer;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.HSBType;
-import org.eclipse.smarthome.core.types.Command;
 import org.openbase.bco.registry.lib.util.UnitConfigProcessor;
 import org.openbase.bco.registry.unit.core.consistency.UnitAliasGenerationConsistencyHandler;
 import org.openbase.jul.exception.CouldNotPerformException;

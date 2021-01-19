@@ -22,8 +22,6 @@ package org.openbase.bco.device.openhab.registry.synchronizer;
  * #L%
  */
 
-import org.eclipse.smarthome.core.thing.dto.ThingDTO;
-import org.eclipse.smarthome.io.rest.core.thing.EnrichedThingDTO;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
 import org.openbase.bco.device.openhab.registry.diff.IdentifiableEnrichedThingDTO;
 import org.openbase.bco.registry.remote.Registries;
@@ -45,6 +43,8 @@ import org.openbase.type.domotic.unit.UnitConfigType.UnitConfig.Builder;
 import org.openbase.type.domotic.unit.UnitTemplateType.UnitTemplate.UnitType;
 import org.openbase.type.domotic.unit.device.DeviceClassType.DeviceClass;
 import org.openbase.type.domotic.unit.gateway.GatewayClassType.GatewayClass;
+import org.openhab.core.io.rest.core.thing.EnrichedThingDTO;
+import org.openhab.core.thing.dto.ThingDTO;
 
 import java.util.ArrayList;
 import java.util.List;

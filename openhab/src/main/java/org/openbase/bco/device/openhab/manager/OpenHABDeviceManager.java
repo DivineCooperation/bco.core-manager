@@ -22,7 +22,6 @@ package org.openbase.bco.device.openhab.manager;
  * #L%
  */
 
-import org.eclipse.smarthome.io.rest.core.item.EnrichedItemDTO;
 import org.openbase.bco.dal.control.layer.unit.device.DeviceManagerImpl;
 import org.openbase.bco.device.openhab.communication.OpenHABRestCommunicator;
 import org.openbase.bco.device.openhab.manager.unit.OpenHABGatewayControllerFactory;
@@ -38,6 +37,7 @@ import org.openbase.jul.pattern.Observer;
 import org.openbase.jul.schedule.RecurrenceEventFilter;
 import org.openbase.type.domotic.unit.UnitConfigType.UnitConfig;
 import org.openbase.type.domotic.unit.device.DeviceClassType.DeviceClass;
+import org.openhab.core.io.rest.core.item.EnrichedItemDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

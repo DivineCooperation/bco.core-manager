@@ -22,9 +22,8 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.openbase.type.domotic.state.BatteryStateType.BatteryState;
-import org.openbase.type.domotic.state.BatteryStateType.BatteryState.State;
+import org.openhab.core.library.types.DecimalType;
 
 /**
  * @author <a href="mailto:pleminoq@openbase.org">Tamino Huxohl</a>
@@ -36,7 +35,6 @@ public class BatteryStateDecimalTypeTransformer implements ServiceStateCommandTr
      * should be between 0 and 1.
      *
      * @param decimalType the battery level between 0 and 1
-     *
      * @return the corresponding battery state
      */
     @Override
@@ -51,7 +49,6 @@ public class BatteryStateDecimalTypeTransformer implements ServiceStateCommandTr
      * Get the battery level between 0 and 1.
      *
      * @param batteryState the state
-     *
      * @return the current battery level
      */
     @Override

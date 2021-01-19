@@ -22,11 +22,11 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.TypeNotSupportedException;
 import org.openbase.type.domotic.state.BatteryStateType.BatteryState;
 import org.openbase.type.domotic.state.BatteryStateType.BatteryState.State;
+import org.openhab.core.library.types.OnOffType;
 
 /**
  * Battery state transformer for battery states only displaying low battery.

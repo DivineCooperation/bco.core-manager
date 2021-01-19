@@ -22,8 +22,8 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.openbase.type.domotic.state.PowerConsumptionStateType.PowerConsumptionState;
+import org.openhab.core.library.types.DecimalType;
 
 /**
  * * @author <a href="mailto:pleminoq@openbase.org">Tamino Huxohl</a>
@@ -45,7 +45,6 @@ public class PowerConsumptionStateDecimalTypeTransformer implements ServiceState
      * must be transformed.
      *
      * @param decimalType the new value for the current in mA
-     *
      * @return a PowerConsumptionState with the given current and a voltage of
      * 230V
      */
@@ -62,7 +61,6 @@ public class PowerConsumptionStateDecimalTypeTransformer implements ServiceState
      * Get the current in milli ampere from a PowerConsumptionState.
      *
      * @param powerConsumptionState the state
-     *
      * @return the current in milli ampere
      */
     @Override

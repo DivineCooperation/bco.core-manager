@@ -22,10 +22,10 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.type.domotic.state.SmokeStateType.SmokeState;
 import org.openbase.type.domotic.state.SmokeStateType.SmokeState.State;
+import org.openhab.core.library.types.DecimalType;
 
 /**
  * * @author <a href="mailto:pleminoq@openbase.org">Tamino Huxohl</a>
@@ -53,7 +53,7 @@ public class SmokeStateDecimalTypeTransformer implements ServiceStateCommandTran
 
     @Override
     public DecimalType transform(final SmokeState smokeState) throws CouldNotTransformException {
-        if(!smokeState.isInitialized() || Double.isNaN(smokeState.getSmokeLevel())) {
+        if (!smokeState.isInitialized() || Double.isNaN(smokeState.getSmokeLevel())) {
             throw new CouldNotTransformException("Given smoke state is not initialized!");
         }
         return new DecimalType(smokeState.getSmokeLevel() * 100d);

@@ -22,14 +22,11 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.openbase.jul.exception.CouldNotTransformException;
 import org.openbase.jul.exception.InvalidStateException;
 import org.openbase.jul.exception.TypeNotSupportedException;
-import org.openbase.jul.extension.type.transform.HSBColorToRGBColorTransformer;
 import org.openbase.type.domotic.state.BrightnessStateType.BrightnessState;
-import org.openbase.type.vision.ColorType.Color.Type;
-import org.openbase.type.vision.HSBColorType;
+import org.openhab.core.library.types.OnOffType;
 
 public class BrightnessStateOnOffTypeTransformer implements ServiceStateCommandTransformer<BrightnessState, OnOffType> {
 
@@ -65,7 +62,7 @@ public class BrightnessStateOnOffTypeTransformer implements ServiceStateCommandT
             } else if (brightnessState.getBrightness() == 0) {
                 return OnOffType.OFF;
             } else {
-                throw new InvalidStateException("Brightness has an invalid value: "+brightnessState.getBrightness());
+                throw new InvalidStateException("Brightness has an invalid value: " + brightnessState.getBrightness());
             }
         } catch (Exception ex) {
             throw new CouldNotTransformException("Could not transform " + BrightnessState.class.getName() + " to " + OnOffType.class.getName() + "!", ex);

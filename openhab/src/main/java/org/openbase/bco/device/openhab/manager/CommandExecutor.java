@@ -25,7 +25,6 @@ package org.openbase.bco.device.openhab.manager;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.protobuf.Message;
-import org.eclipse.smarthome.core.types.Command;
 import org.openbase.bco.dal.lib.action.ActionDescriptionProcessor;
 import org.openbase.bco.dal.lib.layer.unit.UnitController;
 import org.openbase.bco.dal.lib.layer.unit.UnitControllerRegistry;
@@ -48,6 +47,7 @@ import org.openbase.type.domotic.action.ActionInitiatorType.ActionInitiator;
 import org.openbase.type.domotic.action.ActionInitiatorType.ActionInitiator.InitiatorType;
 import org.openbase.type.domotic.action.ActionPriorityType.ActionPriority.Priority;
 import org.openbase.type.domotic.service.ServiceTemplateType.ServiceTemplate.ServiceType;
+import org.openhab.core.types.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,7 +98,6 @@ public class CommandExecutor implements Observer<Object, JsonObject> {
      *
      * @param itemName  the item identifying the unit whose the state should be updated.
      * @param stateType a string serializing the state to be set.
-     *
      * @throws CouldNotPerformException if applying the state update fails.
      */
     public void applyStateUpdate(final String itemName, final String stateType, final String state) throws CouldNotPerformException {
@@ -114,7 +113,6 @@ public class CommandExecutor implements Observer<Object, JsonObject> {
      * @param stateType  defines the type class.
      * @param state      a string serializing the state to be set.
      * @param systemSync flag determining if the state update is the result of a system sync.
-     *
      * @throws CouldNotPerformException
      */
     public void applyStateUpdate(final String itemName, final String stateType, final String state, final boolean systemSync) throws CouldNotPerformException {

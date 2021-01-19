@@ -22,8 +22,8 @@ package org.openbase.bco.device.openhab.manager.transform;
  * #L%
  */
 
-import org.eclipse.smarthome.core.library.types.PercentType;
 import org.openbase.type.domotic.state.BlindStateType.BlindState;
+import org.openhab.core.library.types.PercentType;
 
 import java.math.BigDecimal;
 
